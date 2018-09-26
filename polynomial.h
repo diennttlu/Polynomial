@@ -37,15 +37,22 @@ public:
 		Node<T> *p = head;
 		while(p->next != 0)
 		{
+
 			if(p->heso == 1)
 			{
-				cout<<"x^"<<p->bac;
+				if(p-> bac != 1)
+					cout<<"x^"<<p->bac;
+				else
+					cout<<"x";
 			}
 			else
 			{
 				if(	p->heso == -1)
 				{
-					cout<<"-x^"<<p->bac;
+					if(p->bac == 1)
+						cout<<"-x";
+					else
+						cout<<"-x^"<<p->bac;
 				}
 				else
 				{
@@ -57,7 +64,10 @@ public:
 					{
 						if(	p->heso <0)
 						{
-							cout<<p->heso<<"x^"<<p->bac;
+							if(p->bac == 1)
+								cout<<p->heso<<"x";
+							else
+								cout<<p->heso<<"x^"<<p->bac;
 						}
 					}
 				}
@@ -68,6 +78,7 @@ public:
 				if(p->next->heso >0 || p->next->heso == 0)
 					cout<<"+";
 			p = p->next;
+
 			if(p->bac == 0)
 			{
 				if(p->heso < 0)
@@ -80,6 +91,7 @@ public:
 						cout<<"";
 				}
 			}
+
 		}
 		cout<<endl;
 	};
@@ -109,12 +121,14 @@ public:
 
 	Polynomial<T> operator * (T value)
 	{
-		Polynomial<T> p;
-		Node<T> *q = p.head;
-		for(int i = head->bac; i>0;i--)
+		Polynomial<T> p(head->bac);
+		Node<T> *r = p.head;
+		Node<T> *q = head;
+		for(int i = head->bac; i>=0;i--)
 		{
-			q->heso = (q->heso)*value;
-			q = q->next; 
+			r ->heso = q->heso * value;
+			r = r->next;
+			q = q->next;	
 		}
 		return p;
 	};
